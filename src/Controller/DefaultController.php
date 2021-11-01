@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController
+class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="defaul page");
@@ -14,5 +15,16 @@ class DefaultController
     public function indexAction(): Response
     {
         return new Response("Привет мир!");
+    }
+
+    /**
+     * @Route("/show_name/{name}", name="show-name-page");
+     *
+     */
+    public function showNameAction(string $name): Response
+    {
+        return $this->render('order/show.html.twig', [
+            "name" => $name,
+        ]);
     }
 }
