@@ -27,6 +27,7 @@ class DefaultController extends AbstractController
         return $this->render('order/show.html.twig', [
             "name" => $name,
             "number" => $random_int,
+            "number_list" => [1, 2, 3, 4, 5]
         ]);
     }
 }
