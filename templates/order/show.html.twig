@@ -5,5 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    Hello, {{ name }}
+    <div>
+        Hello, {{ name }}
+    </div>
+    <div>
+        Наше число: {{ number }} является
+    </div>
+    <div>
+        {% if number % 2 == 0 %}
+            четным числом
+        {% else %}
+            нечетным числом
+        {% endif %}
+    </div>
 {% endblock %}

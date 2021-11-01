@@ -23,8 +23,10 @@ class DefaultController extends AbstractController
      */
     public function showNameAction(string $name): Response
     {
+        $random_int = random_int(0, 100);
         return $this->render('order/show.html.twig', [
             "name" => $name,
+            "number" => $random_int,
         ]);
     }
 }
