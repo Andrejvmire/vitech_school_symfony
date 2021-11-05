@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\RequestRepository")
  */
 class Request
 {
@@ -34,13 +35,13 @@ class Request
     /**
      * @ORM\Column(type="datetime", name="created_at")
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     public function __construct(string $title, string $message)
     {
         $this->title = $title;
         $this->message = $message;
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new DateTime();
     }
 
     /**
@@ -84,10 +85,18 @@ class Request
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
     }
 }
