@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+ {% block body %}
+     <table class="table table-hover table-striped">
+         <thead class="table-primary">
+         <tr>
+             <td>Идентификатор</td>
+             <td>Заголовок</td>
+             <td>Сообщение</td>
+             <td>Статус</td>
+             <td>Дата создания</td>
+         </tr>
+         </thead>
+         <tbody>
+         {% for request in request_data %}
+             <tr>
+                 <td>{{ request.id }}</td>
+                 <td><a href="{{ path('request view', {'id': request.id}) }}" class="nav-link">{{ request.title }}</a></td>
+                 <td>{{ request.message }}</td>
+                 <td>{{ request.status }}</td>
+                 <td>{{ request.createdAt.format("Y-m-d") }}</td>
+             </tr>
+         {% endfor %}
+         </tbody>
+     </table>
+ {% endblock %}
