@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Request;
+use App\Form\RequestForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,7 +28,7 @@ class RequestController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="request view")
+     * @Route("/{id</d+>}", name="request view")
      */
     public function requestViewAction(int $id): Response
     {
@@ -36,6 +37,22 @@ class RequestController extends AbstractController
             ->find($id);
         return $this->render('request/view.html.twig', [
             "request_data" => $request_data,
+        ]);
+    }
+
+    /**
+     * @Route("/add", name="add-request", )
+     */
+    public function addRequestAction(): Response
+    {
+        $request_data = $this->getDoctrine()
+            ->getRepository(Request::class)
+            ->findAll();
+
+        $form = $this->createForm(RequestForm::class, $request_data);
+
+        return $this->renderForm('request/add_form.html.twig', [
+            "form_add_request" => $form,
         ]);
     }
 }
