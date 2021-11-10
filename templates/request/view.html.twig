@@ -1,25 +1,29 @@
 {% extends "base.html.twig" %}
- {% block body %}
-     <table class="table table-hover table-striped">
-         <thead class="table-primary">
-         <tr>
-             <td>Идентификатор</td>
-             <td>Заголовок</td>
-             <td>Сообщение</td>
-             <td>Статус</td>
-             <td>Дата создания</td>
-         </tr>
-         </thead>
-         <tbody>
-         {% for request in request_data %}
-             <tr>
-                 <td>{{ request.id }}</td>
-                 <td><a href="{{ path('request view', {'id': request.id}) }}" class="nav-link">{{ request.title }}</a></td>
-                 <td>{{ request.message }}</td>
-                 <td>{{ request.status }}</td>
-                 <td>{{ request.createdAt.format("Y-m-d") }}</td>
-             </tr>
-         {% endfor %}
-         </tbody>
-     </table>
- {% endblock %}
+
+{% block body %}
+    <a class="nav-link" href="{{ path('request list') }}"><-- назад</a>
+    <table class="table table-hover table-striped">
+        <tbody>
+        <tr>
+            <td class="table-primary">Идентификатор</td>
+            <td>{{ request_data.id }}</td>
+        </tr>
+        <tr>
+            <td class="table-primary">Заголовок</td>
+            <td>{{ request_data.title }}</td>
+        </tr>
+        <tr>
+            <td class="table-primary">Сообщение</td>
+            <td>{{ request_data.message }}</td>
+        </tr>
+        <tr>
+            <td class="table-primary">Статус</td>
+            <td>{{ request_data.status }}</td>
+        </tr>
+        <tr>
+            <td class="table-primary">Дата создания</td>
+            <td>{{ request_data.createdAt.format("Y-m-d") }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

@@ -20,7 +20,7 @@ class RequestController extends AbstractController
         $request_data = $this->getDoctrine()
             ->getRepository(Request::class)
             ->findAll();
-        return $this->render('request/view.html.twig',
+        return $this->render('request/list.html.twig',
         [
             "request_data" => $request_data,
         ]);
@@ -34,7 +34,7 @@ class RequestController extends AbstractController
         $request_data = $this->getDoctrine()
             ->getRepository(Request::class)
             ->find($id);
-        return $this->render('request/request.html.twig',[
+        return $this->render('request/view.html.twig',[
             "request_data" => $request_data,
         ]);
     }
