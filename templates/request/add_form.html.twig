@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
-{% form_theme form_add_request 'bootstrap_5_layout.html.twig' %}
 {% block body %}
+    <a href="{{ path('request list') }}" class="nav nav-link"><-- Назад</a>
     {{ form(form_add_request) }}
 {% endblock %}

@@ -14,7 +14,8 @@
          {% for request in request_data %}
              <tr>
                  <td>{{ request.id }}</td>
-                 <td><a href="{{ path('request view', {'id': request.id}) }}" class="nav-link">{{ request.title }}</a></td>
+                 <td><a href="{{ path('request view', {'id': request.id}) }}" class="nav-link">{{ request.title }}</a>
+                 </td>
                  <td>{{ request.message }}</td>
                  <td>{{ request.status }}</td>
                  <td>{{ request.createdAt.format("Y-m-d") }}</td>
@@ -22,4 +23,5 @@
          {% endfor %}
          </tbody>
      </table>
+     <a href="{{ path('add-request') }}" class="btn btn-primary">Добавить</a>
  {% endblock %}

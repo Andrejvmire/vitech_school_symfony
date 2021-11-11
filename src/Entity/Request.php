@@ -30,7 +30,7 @@ class Request
     /**
      * @ORM\Column(type="smallint", options={"default": 0}, name="status")
      */
-    private int $status;
+    private int $status = 0;
 
     /**
      * @ORM\Column(type="datetime", name="created_at")
