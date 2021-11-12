@@ -48,16 +48,37 @@ class RequestController extends AbstractController
     public function addRequestAction(Request $request): Response
     {
         $requestDTO = new RequestDTO();
-
         $form = $this->createForm(RequestForm::class, $requestDTO);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $request = RequestEntity::createFromDTO($requestDTO);
-            $entityManager->persist($request);
+            $requestEntity = RequestEntity::createFromDTO($requestDTO);
+            $entityManager->persist($requestEntity);
             $entityManager->flush();
-            $id = $request->getId();
+            $id = $requestEntity->getId();
+            return $this->redirectToRoute("request view", ["id" => $id]);
+        }
+
+        return $this->renderForm('request/add_form.html.twig', [
+            "form_add_request" => $form,
+        ]);
+    }
+
+    /**
+     * @Route("/edit/{id}", name="edit-request")
+     */
+    public function editRequestAction(Request $request, int $id): Response
+    {
+        $requestEntity = $this->getDoctrine()
+            ->getRepository(RequestEntity::class)
+            ->findOneBy(["id" => $id]);
+        $requestDTO = RequestDTO::createFromRequestEntity($requestEntity);
+        $form = $this->createForm(RequestForm::class, $requestDTO);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $requestEntity->updateFromDTO($requestDTO);
+            $entityManager->flush();
             return $this->redirectToRoute("request view", ["id" => $id]);
         }
 

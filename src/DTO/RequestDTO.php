@@ -2,6 +2,7 @@
 
 namespace App\DTO;
 
+use App\Entity\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class RequestDTO
@@ -38,4 +39,11 @@ class RequestDTO
         $this->message = $message;
     }
 
+    public static function createFromRequestEntity(Request $requestEntity): self
+    {
+        $dto = new self();
+        $dto->title = $requestEntity->getTitle();
+        $dto->message = $requestEntity->getMessage();
+        return $dto;
+    }
 }
