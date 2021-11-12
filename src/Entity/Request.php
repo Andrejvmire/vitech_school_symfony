@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\DTO\RequestDTO;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,6 +37,13 @@ class Request
      * @ORM\Column(type="datetime", name="created_at")
      */
     private DateTime $createdAt;
+
+    public static function createFromDTO(RequestDTO $requestDTO): self
+    {
+        $title = $requestDTO->getTitle();
+        $message = $requestDTO->getMessage();
+        return new self($title, $message);
+    }
 
     public function __construct(string $title, string $message)
     {

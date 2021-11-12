@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DTO\RequestDTO;
 use App\Entity\Request as RequestEntity;
 use App\Form\RequestForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,21 +43,21 @@ class RequestController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="add-request", )
+     * @Route("/add", name="add-request")
      */
     public function addRequestAction(Request $request): Response
     {
-        $request_data = new RequestEntity("3", "3");
+        $requestDTO = new RequestDTO();
 
-        $form = $this->createForm(RequestForm::class, $request_data);
+        $form = $this->createForm(RequestForm::class, $requestDTO);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $request_data = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($request_data);
+            $request = RequestEntity::createFromDTO($requestDTO);
+            $entityManager->persist($request);
             $entityManager->flush();
-            $id = $request_data->getId();
+            $id = $request->getId();
             return $this->redirectToRoute("request view", ["id" => $id]);
         }
 
