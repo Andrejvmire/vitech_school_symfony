@@ -1,0 +1,15 @@
+{% block header %}
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{ path('app_login') }}"
+                                    class="nav-link {{ app.request.pathInfo == path('app_login') ? "active" : "" }}"
+                                    aria-current="page">Вход</a></li>
+            <li class="nav-item"><a href="{{ path('app_registration') }}"
+                                    class="nav-link {{ app.request.pathInfo == path('app_registration') ? "active" : "" }}">Регистрация</a>
+            </li>
+            <li class="nav-item"><a href="{{ path('request list') }}"
+                                    class="nav-link {{ app.request.pathInfo == path('request list') ? "active" : "" }}">Отзывы</a>
+            </li>
+        </ul>
+    </header>
+{% endblock %}
