@@ -8,6 +8,7 @@
              <td>Сообщение</td>
              <td>Статус</td>
              <td>Дата создания</td>
+             <td>Автор</td>
          </tr>
          </thead>
          <tbody>
@@ -19,6 +20,11 @@
                  <td>{{ request.message }}</td>
                  <td>{{ request.status }}</td>
                  <td>{{ request.createdAt.format("Y-m-d") }}</td>
+                 <td>
+                     {% if request.createdBy is not null %}
+                         {{ request.createdBy.email }}
+                     {% endif %}
+                 </td>
              </tr>
          {% endfor %}
          </tbody>
