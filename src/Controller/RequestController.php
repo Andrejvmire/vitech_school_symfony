@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\DTO\RequestDTO;
 use App\Entity\Request as RequestEntity;
+use App\Entity\User;
 use App\Form\RequestForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,6 +54,11 @@ class RequestController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $requestEntity = RequestEntity::createFromDTO($requestDTO);
+            $user = $this
+                ->getDoctrine()
+                ->getRepository(User::class)
+                ->findUserBySecureToken($this->getUser());
+            $requestEntity->setCreatedBy($user);
             $entityManager->persist($requestEntity);
             $entityManager->flush();
             $id = $requestEntity->getId();
